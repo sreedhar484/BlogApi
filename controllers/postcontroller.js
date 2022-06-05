@@ -162,7 +162,9 @@ const approvePost = async (req, res) => {
     console.log(req.body)
     let data = {
         approve : 1,
-        isupdate: 1
+        isupdate: 1,
+        title: req.body.title,
+        info: req.body.info,
     }
     const updatedPost = await Post.update(data, { where: { id: id }})
 
