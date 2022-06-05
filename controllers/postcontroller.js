@@ -25,10 +25,13 @@ const addPost = async (req, res) => {
     let info = {
         author: req.body.username,
         title: req.body.title,
-        info: req.body.info,
+        info: req.body.info,        
+        titlenew: req.body.title,
+        infonew: req.body.info,
         createdAt: Date(),
         updatedAt: false,
-        approve: false
+        approve: false,
+        isupdate: false
     }
 
     const product = await Post.create(info)
@@ -46,7 +49,7 @@ const getAllPosts = async (req, res) => {
     console.log(req.body)
     console.log('<<<<<<<<<<<....')
     let posts = await Post.findAll({})
-
+    console.log(posts)
     posts.sort((a,b)=>{
         return new Date(b.createdAt) - new Date(a.createdAt)
     })
@@ -103,9 +106,6 @@ const getPostByUser = async (req, res) => {
 
 }
 
-
-
-
 const updateHistory = async (req, res) => {
     console.log('---==========')
     
@@ -129,10 +129,24 @@ const updatePost = async (req, res) => {
 
     let id = req.body.id
     console.log(req.body)
-    const updatedPost = await Post.update(req.body, { where: { id: id }})
+
+    const getPost = await Post.findOne({ where: { id: id }})
+    console.log(getPost,'--->>>>>>>>>>>>>>>==')
+    let data = {
+        title: getPost.titlenew,
+        info: getPost.infonew,
+        titlenew: req.body.title,
+        infonew: req.body.info,
+        updatedAt: new Date(),
+        isupdate: false
+    }
+    const updatedPost = await Post.update(data, { where: { id: id }})
+
     let updatedData = {
         author: req.body.username,
         postId: id,
+        updatedtitle: req.body.title,
+        updatedinfo: req.body.info,
         updatedAt: new Date()
     }
     const posttrack = await PostUpdate.create(updatedData)    
@@ -144,8 +158,13 @@ const updatePost = async (req, res) => {
 const approvePost = async (req, res) => {
 
     let id = req.body.id
+
     console.log(req.body)
-    const updatedPost = await Post.update(req.body, { where: { id: id }})
+    let data = {
+        approve : 1,
+        isupdate: 1
+    }
+    const updatedPost = await Post.update(data, { where: { id: id }})
 
     res.status(200).send(updatedPost)
    
