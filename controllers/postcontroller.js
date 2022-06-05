@@ -105,6 +105,24 @@ const getPostByUser = async (req, res) => {
 
 
 
+
+const updateHistory = async (req, res) => {
+    console.log('---==========')
+    
+    console.log('---==========')
+    let posts = await PostUpdate.findAll({})
+    console.log(posts)
+    posts.sort((a,b)=>{
+        return new Date(b.updatedAt) - new Date(a.updatedAt)
+    })
+
+    
+
+    res.status(200).send(posts)
+
+}
+
+
 // 3. update Post
 
 const updatePost = async (req, res) => {
@@ -156,5 +174,6 @@ module.exports = {
 
     updatePost,
     deletePost,
-    approvePost    
+    approvePost,
+    updateHistory
 }
