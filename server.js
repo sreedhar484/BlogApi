@@ -39,6 +39,8 @@ app.post('/write',Post.addPost)
 
 app.put('/update',Post.updatePost)
 
+app.get('/history',Post.updateHistory)
+
 app.delete('/delete/:id',Post.deletePost)
 
 app.post('/posts',Post.getAllPosts)
