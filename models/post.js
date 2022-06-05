@@ -9,10 +9,19 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
+        titlenew: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         info: {
             type: DataTypes.STRING,
             allowNull: false
         },
+        infonew: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+
         createdAt: {
             type: DataTypes.DATE
         },
@@ -21,6 +30,9 @@ module.exports = (sequelize, DataTypes) => {
         },
         approve: {
             type: DataTypes.BOOLEAN
+        },
+        isupdate:{
+            type: DataTypes.BOOLEAN            
         }
     })
 
