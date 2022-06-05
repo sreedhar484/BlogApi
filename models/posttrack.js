@@ -7,6 +7,12 @@ module.exports = (sequelize, DataTypes) => {
         postId: {
             type: DataTypes.INTEGER
         },
+        updatedtitle:{
+            type: DataTypes.STRING
+        },
+        updatedinfo:{
+            type: DataTypes.STRING
+        },
         updatedAt: {
             type: DataTypes.DATE
         },
